@@ -58,7 +58,7 @@ public class loginController implements Initializable {
                     System.out.println(name);
                 }
                 if (counter == 1){
-                    System.out.println("Success");
+                    showAddItemScreen();
                 }else {
                     Shaker shaker = new Shaker(login_loginButton);
                     shaker.shake();
@@ -84,7 +84,20 @@ public class loginController implements Initializable {
             stage.show();
         });
     }
-
+    private void showAddItemScreen (){
+        login_signUpButton.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/sample/view/additem.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
 
 }
