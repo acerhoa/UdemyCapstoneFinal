@@ -9,9 +9,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.database.DatabaseHandler;
+import sample.model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class loginController implements Initializable {
@@ -33,17 +37,28 @@ public class loginController implements Initializable {
     @FXML
     private JFXButton login_signUpButton;
 
+    private DatabaseHandler dbhandler = new DatabaseHandler();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String loginUser = login_user.getText().trim();
-        String loginPass = login_pass.getText().trim();
-
 
         login_loginButton.setOnAction(event ->{
-            if(!loginUser.equals("") || !loginPass.equals("")){
-                Login(loginUser,loginPass);
-            }else {
-                System.out.println("Error: Try Again");
+            String loginUser = login_user.getText().trim();
+            String loginPass = login_pass.getText().trim();
+            User newlogin = new User();
+            newlogin.setUsername(loginUser);
+            newlogin.setPassword(loginPass);
+            ResultSet userRow = dbhandler.getUser(newlogin);
+            int counter = 0;
+            try {
+                while(userRow.next()) {
+                    counter++;
+                }
+                if (counter == 1){
+                    System.out.println("Success");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         });
 
@@ -64,10 +79,6 @@ public class loginController implements Initializable {
         });
     }
 
-    private void Login(String user, String pass){
-//        check if user exist
-
-    }
 
 
 }
