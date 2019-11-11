@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.animations.Shaker;
 import sample.database.DatabaseHandler;
 import sample.model.User;
 
@@ -53,9 +54,14 @@ public class loginController implements Initializable {
             try {
                 while(userRow.next()) {
                     counter++;
+                    String name = userRow.getString("firstname");
+                    System.out.println(name);
                 }
                 if (counter == 1){
                     System.out.println("Success");
+                }else {
+                    Shaker shaker = new Shaker(login_loginButton);
+                    shaker.shake();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
