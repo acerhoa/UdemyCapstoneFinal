@@ -1,12 +1,12 @@
 package sample.database;
 
+import sample.model.Task;
 import sample.model.User;
 
 import java.sql.*;
 
 public class DatabaseHandler extends Configs{
     Connection dbConnection;
-
     public Connection getDbConnection() throws SQLException, ClassNotFoundException {
         String connectionString = "jdbc:mysql://" + dbHost + "/" + dbName;
         Class.forName("com.mysql.jdbc.Driver");
@@ -40,6 +40,28 @@ public class DatabaseHandler extends Configs{
         }
     }
 
+    public void addTask(Task task){
+        String insert = "INSERT INTO " + Constant.TASKS_TABLE + "(" +Constant.USERS_USERID  +
+                Constant.TASKS_DATECREATED + "," +
+                Constant.TASKS_DESCRIPTION + "," +
+                Constant.TASKS_TASK + ")" +
+                "VALUES(?,?,?,?)";
+        try {
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
+            preparedStatement.setInt(1,1);
+            preparedStatement.setTimestamp(2,task.getDatecreated());
+            preparedStatement.setString(3,task.getDescription());
+            preparedStatement.setString(4,task.getTask());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //    Read DB
     public ResultSet getUser(User user){
         ResultSet resultSet = null;
         if (!user.getUsername().equals("") || !user.getPassword().equals("")){
@@ -61,7 +83,7 @@ public class DatabaseHandler extends Configs{
         }
         return resultSet;
     }
-//    Read DB
+
 
 //    Update DB
 

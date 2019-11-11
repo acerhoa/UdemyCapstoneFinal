@@ -14,9 +14,10 @@ public class Constant {
     public static final String USERS_GENDER = "gender";
 
     public static final String TASKS_TASKID = "taskid";
-//    public static final String TASKS_USERID = "userid";
-    public static final String TASKS_DATECREATED = "datedcreated";
+    public static final String TASKS_USERID = "userid";
+    public static final String TASKS_DATECREATED = "datecreated";
     public static final String TASKS_DESCRIPTION = "description";
+    public static final String TASKS_TASK = "task";
 
 
 

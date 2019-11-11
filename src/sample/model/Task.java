@@ -1,7 +1,9 @@
 package sample.model;
 
+import java.sql.Timestamp;
+
 public class Task {
-    private long datecreated;
+    private Timestamp datecreated;
     private String description;
     private String task;
 
@@ -9,17 +11,17 @@ public class Task {
 
     }
 
-    public Task(long datecreated, String description, String task) {
+    public Task(Timestamp datecreated, String description, String task) {
         this.datecreated = datecreated;
         this.description = description;
         this.task = task;
     }
 
-    public long getDatecreated() {
+    public Timestamp getDatecreated() {
         return datecreated;
     }
 
-    public void setDatecreated(long datecreated) {
+    public void setDatecreated(Timestamp datecreated) {
         this.datecreated = datecreated;
     }
 
