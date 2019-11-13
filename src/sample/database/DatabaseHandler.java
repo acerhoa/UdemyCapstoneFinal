@@ -1,5 +1,6 @@
 package sample.database;
 
+import sample.controller.AdditemController;
 import sample.model.Task;
 import sample.model.User;
 
@@ -33,6 +34,7 @@ public class DatabaseHandler extends Configs{
             preparedStatement.setString(6,user.getGender());
 //            update does not return
             preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -53,6 +55,7 @@ public class DatabaseHandler extends Configs{
             preparedStatement.setString(3,task.getDescription());
             preparedStatement.setString(4,task.getTask());
             preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -60,6 +63,25 @@ public class DatabaseHandler extends Configs{
         }
     }
     //    Read DB
+    public ResultSet getTasksByUser(int UserId){
+        ResultSet resultTasks = null;
+
+        String query = "SELECT * FROM " + Constant.TASKS_TABLE + " WHERE " + Constant.USERS_USERID + "=?";
+
+        try {
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+            preparedStatement.setInt(1,UserId);
+            resultTasks = preparedStatement.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return resultTasks;
+    }
+
     public ResultSet getUser(User user){
         ResultSet resultSet = null;
         if (!user.getUsername().equals("") || !user.getPassword().equals("")){
@@ -82,9 +104,35 @@ public class DatabaseHandler extends Configs{
         return resultSet;
     }
 
+    public int getAllTasks(int userId) throws SQLException, ClassNotFoundException {
+        String query = "SELECT COUNT(*) FROM " + Constant.TASKS_TABLE + " WHERE " + Constant.USERS_USERID + "=?";
+
+        PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+        preparedStatement.setInt(1, userId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            return resultSet.getInt(1);
+        }
+        return resultSet.getInt(1);
+    }
+
 
 //    Update DB
 
 //    Delete from DB
+    public void deleteTask(int userId, int taskId) {
+        String query = "DELETE FROM " + Constant.TASKS_TABLE + " WHERE " + Constant.USERS_USERID + "=?" + " AND " + Constant.TASKS_TASKID + "=?";
 
+        try {
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+            preparedStatement.setInt(1,userId);
+            preparedStatement.setInt(2,taskId);
+            preparedStatement.execute();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.database.DatabaseHandler;
+
+import java.sql.ResultSet;
 
 public class Main extends Application {
 
@@ -13,10 +16,14 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/view/login.fxml"));
 //        Parent root = FXMLLoader.load(getClass().getResource("/sample/view/signup.fxml"));
 //        Parent root = FXMLLoader.load(getClass().getResource("/sample/view/addItem.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("/sample/view/List.fxml"));
 
         primaryStage.setTitle("To Do");
         primaryStage.setScene(new Scene(root, 800, 500));
         primaryStage.show();
+
+
+
     }
 
 
