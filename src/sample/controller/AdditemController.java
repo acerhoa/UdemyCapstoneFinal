@@ -14,7 +14,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class additemController implements Initializable {
+public class AdditemController implements Initializable {
+
+    public static int userId;
+
     @FXML
     private ResourceBundle resources;
 
@@ -59,6 +62,9 @@ public class additemController implements Initializable {
 
             try {
                 AnchorPane formpane = FXMLLoader.load(getClass().getResource("/sample/view/additemform.fxml"));
+                AdditemController.userId = getUserId();
+//                AdditemformController additemformController = new AdditemformController();
+//                additemformController.setUserId(getUserId());
                 FadeTransition rootTransition = new FadeTransition(Duration.millis(2000),formpane);
                 rootTransition.setFromValue(0f);
                 rootTransition.setToValue(1f);
@@ -70,5 +76,14 @@ public class additemController implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+
+    public void setUserId(int userId){
+        this.userId = userId;
+        System.out.println("User Id is " + this.userId);
+    }
+
+    public int getUserId(){
+        return userId;
     }
 }

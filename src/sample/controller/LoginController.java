@@ -19,7 +19,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class loginController implements Initializable {
+public class LoginController implements Initializable {
+
+    private int userId;
 
     @FXML
     private ResourceBundle resources;
@@ -55,6 +57,8 @@ public class loginController implements Initializable {
                 while(userRow.next()) {
                     counter++;
                     String name = userRow.getString("firstname");
+                    userId = userRow.getInt("userid");
+
                     System.out.println(name);
                 }
                 if (counter == 1){
@@ -96,6 +100,10 @@ public class loginController implements Initializable {
         Parent root = loader.getRoot();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
+
+        AdditemController additemController = loader.getController();
+        additemController.setUserId(userId);
+
         stage.show();
     }
 

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #cfcfcf;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.additemformController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #cfcfcf;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.AdditemformController">
    <children>
       <JFXTextField fx:id="additemTask" focusColor="#ffc4ff" layoutX="173.0" layoutY="173.0" prefHeight="63.0" prefWidth="420.0" promptText="Task" unFocusColor="#9c64a6">
          <font>

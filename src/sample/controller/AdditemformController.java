@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
-public class additemformController implements Initializable {
+public class AdditemformController implements Initializable {
     @FXML
     private ResourceBundle resources;
 
@@ -30,16 +30,39 @@ public class additemformController implements Initializable {
 
     private DatabaseHandler dbhandler;
 
+    private int userId;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dbhandler = new DatabaseHandler();
         additemButton.setOnAction(event -> {
             Task newtask = new Task();
             java.sql.Timestamp timestamp = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
-            newtask.setDatecreated(timestamp);
-            newtask.setDescription("A task");
-            newtask.setTask("New Task");
-            dbhandler.addTask(newtask);
+            String taskText =  additemTask.getText().trim();
+            String taskDescription = additemDescription.getText().trim();
+
+            if(!taskText.equals("") || !taskDescription.equals("")){
+                System.out.println("User Id: " + AdditemController.userId);
+                newtask.setUserId(AdditemController.userId);
+                newtask.setDatecreated(timestamp);
+                newtask.setDescription(taskDescription);
+                newtask.setTask(taskText);
+                dbhandler.addTask(newtask);
+                System.out.println("Something Added");
+            }else{
+                System.out.println("Nothing Added");
+            }
+
+
         });
+    }
+
+    public int getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+        System.out.println(this.userId);
     }
 }

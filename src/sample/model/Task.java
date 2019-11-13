@@ -3,6 +3,7 @@ package sample.model;
 import java.sql.Timestamp;
 
 public class Task {
+    private int userId;
     private Timestamp datecreated;
     private String description;
     private String task;
@@ -11,7 +12,8 @@ public class Task {
 
     }
 
-    public Task(Timestamp datecreated, String description, String task) {
+    public Task(int userId, Timestamp datecreated, String description, String task) {
+        this.userId = userId;
         this.datecreated = datecreated;
         this.description = description;
         this.task = task;
@@ -39,5 +41,13 @@ public class Task {
 
     public void setTask(String task) {
         this.task = task;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

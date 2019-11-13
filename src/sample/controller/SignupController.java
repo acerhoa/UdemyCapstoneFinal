@@ -12,7 +12,7 @@ import sample.model.User;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class signupController implements Initializable {
+public class SignupController implements Initializable {
     @FXML
     private JFXTextField signupFirstname;
 

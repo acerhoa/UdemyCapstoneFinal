@@ -41,14 +41,14 @@ public class DatabaseHandler extends Configs{
     }
 
     public void addTask(Task task){
-        String insert = "INSERT INTO " + Constant.TASKS_TABLE + "(" +Constant.USERS_USERID  +
+        String insert = "INSERT INTO " + Constant.TASKS_TABLE + "(" + Constant.USERS_USERID  + "," +
                 Constant.TASKS_DATECREATED + "," +
                 Constant.TASKS_DESCRIPTION + "," +
                 Constant.TASKS_TASK + ")" +
                 "VALUES(?,?,?,?)";
         try {
             PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
-            preparedStatement.setInt(1,1);
+            preparedStatement.setInt(1,task.getUserId());
             preparedStatement.setTimestamp(2,task.getDatecreated());
             preparedStatement.setString(3,task.getDescription());
             preparedStatement.setString(4,task.getTask());
@@ -59,8 +59,6 @@ public class DatabaseHandler extends Configs{
             e.printStackTrace();
         }
     }
-
-
     //    Read DB
     public ResultSet getUser(User user){
         ResultSet resultSet = null;
